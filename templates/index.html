@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Môj obchod</title>
+</head>
+
+<body>
+
+<h1>Môj internetový obchod</h1>
+
+<h2>Sklad</h2>
+
+{% for nazov, udaje in sklad.items() %}
+
+<p>
+    <b>{{ nazov }}</b>
+    - {{ udaje.cena }} €
+    - skladom: {{ udaje.mnozstvo }} ks
+</p>
+
+<form action="/pridat" method="post">
+    <input type="hidden" name="nazov" value="{{ nazov }}">
+    <button type="submit">Pridať do košíka</button>
+</form>
+
+{% endfor %}
+
+<hr>
+
+<h2>Košík</h2>
+
+{% for polozka in kosik %}
+    <p>{{ polozka }}</p>
+{% endfor %}
+
+<p>Cena: {{ cena }} €</p>
+
+<h3>Zľavový kód</h3>
+
+<form action="/zlava" method="post">
+
+    <input type="text" name="kod" placeholder="BELI10">
+
+    <button type="submit">
+        Použiť zľavu
+    </button>
+
+</form>
+
+<p>Zľava: {{ zlava }} €</p>
+
+<p>Finálna cena: {{ finalna_cena }} €</p>
+
+<p>{{ sprava }}</p>
+
+</body>
+</html>
